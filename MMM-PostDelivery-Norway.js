@@ -7,7 +7,8 @@
 Module.register("MMM-PostDelivery-Norway", {
     defaults: {
         zipCode: 7033,
-        header: 'Leveringsdag for post'
+        header: 'Leveringsdag for post',
+        numberOfDays: 1, // Max 6
     },
 
     start: function() {
@@ -58,10 +59,14 @@ Module.register("MMM-PostDelivery-Norway", {
             headerContainer.className = 'light small';
             wrapper.appendChild(headerContainer);
         }
-        let deliveryContainer = document.createElement("div");
-        deliveryContainer.className = 'small';
-        deliveryContainer.innerHTML = this.deliveryPlan.nextDeliveryDays[0];
-        wrapper.appendChild(deliveryContainer);
+        for (i = 0; i < this.config.numberOfDays; i++) {
+            if (typeof this.deliveryPlan.nextDeliveryDays[i] !== 'undefined') {
+                let deliveryContainer = document.createElement("div");
+                deliveryContainer.className = 'small';
+                deliveryContainer.innerHTML = this.deliveryPlan.nextDeliveryDays[i];
+                wrapper.appendChild(deliveryContainer);
+            }
+        }
 
         return wrapper;
     }

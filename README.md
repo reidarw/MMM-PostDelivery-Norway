@@ -41,6 +41,7 @@ and insert your own zip code.
 | --- | --- |
 | `header` | Alternative header. Default: "Leveringsdag for post" |
 | `zipCode` | Your zipcode in Norway. Default: 7033 |
+| `numberOfDays` | Number of days to display. Maximum 6. Default: 1 |
 
 ## Sample screenshot
 
