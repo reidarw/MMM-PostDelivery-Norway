@@ -5,7 +5,7 @@ module.exports = node_helper.create({
     socketNotificationReceived: function (notification, payload) {
         const self = this;
         if (notification === "GET_POST_PLAN") {
-            const url = 'https://www.posten.no/levering-av-post/_/component/main/1/leftRegion/5?postCode=' +
+            const url = 'https://www.posten.no/levering-av-post/_/component/main/1/leftRegion/9?postCode=' +
                 payload.config.zipCode;
             let returnData = {error: true};
             let headers = {
