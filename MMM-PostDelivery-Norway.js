@@ -38,6 +38,7 @@ Module.register("MMM-PostDelivery-Norway", {
     socketNotificationReceived: function(notification, payload) {
         if (notification === "POST_PLAN") {
             this.deliveryPlan = payload;
+            console.log(this.deliveryPlan);
             this.loaded = true;
             this.updateDom(1000);
         }
@@ -59,12 +60,19 @@ Module.register("MMM-PostDelivery-Norway", {
             headerContainer.className = 'light small';
             wrapper.appendChild(headerContainer);
         }
+
+        const daysInNorwegian = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'];
+
         for (i = 0; i < this.config.numberOfDays; i++) {
-            if (typeof this.deliveryPlan.nextDeliveryDays[i] !== 'undefined') {
+            if (typeof this.deliveryPlan.delivery_dates[i] !== 'undefined') {
                 let deliveryContainer = document.createElement("div");
                 deliveryContainer.className = 'small';
-                deliveryContainer.innerHTML = this.deliveryPlan.nextDeliveryDays[i];
-                wrapper.appendChild(deliveryContainer);
+                if (this.deliveryPlan.delivery_dates[i]) {
+                    let date = new Date(this.deliveryPlan.delivery_dates[i]);
+                    deliveryContainer.innerHTML = daysInNorwegian[date.getDay()];
+                    wrapper.appendChild(deliveryContainer);
+                }
+
             }
         }
 
