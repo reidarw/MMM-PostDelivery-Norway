@@ -35,7 +35,6 @@ module.exports = node_helper.create({
             }, function (error, response, body) {
                 if (!error && response.statusCode === 200) {
                     returnData = JSON.parse(body);
-                    console.log(returnData);
                 }
                 self.sendSocketNotification("POST_PLAN", returnData);
             });
