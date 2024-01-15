@@ -23,6 +23,11 @@ Clone this repository and install the dependencies:
 git clone https://github.com/reidarw/MMM-PostDelivery-Norway.git
 ````
 
+Install dependencies
+```
+npm install
+```
+
 Add the module to the modules array in the `config/config.js` file
 and insert your own zip code. 
 

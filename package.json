@@ -1,0 +1,14 @@
+{
+  "name": "mmm-postdelivery-norway",
+  "version": "1.0.0",
+  "description": "A MagicMirror2 module for showing the next post delivery day for your zip code in Norway",
+  "main": "MMM-PostDelivery-Norway.js",
+  "keywords": [],
+  "author": {
+    "name": "Reidar W"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}
