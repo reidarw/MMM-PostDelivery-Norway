@@ -43,39 +43,53 @@ Module.register("MMM-PostDelivery-Norway", {
             this.updateDom(1000);
         }
     },
-
     getDom: function() {
         let wrapper = document.createElement("div");
-
+    
         if (this.loaded === false) {
             wrapper.innerHTML = 'Laster...';
             wrapper.className = "dimmed light small";
-
+    
             return wrapper;
         }
-
+    
         if (this.config.header) {
             let headerContainer = document.createElement('div');
             headerContainer.innerHTML = this.config.header;
             headerContainer.className = 'light small';
             wrapper.appendChild(headerContainer);
         }
-
+    
         const daysInNorwegian = ['Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'];
-
-        for (i = 0; i < this.config.numberOfDays; i++) {
+        
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+        tomorrow.setHours(0, 0, 0, 0);
+    
+        for (let i = 0; i < this.config.numberOfDays; i++) {
             if (typeof this.deliveryPlan.delivery_dates[i] !== 'undefined') {
                 let deliveryContainer = document.createElement("div");
                 deliveryContainer.className = 'small';
+    
                 if (this.deliveryPlan.delivery_dates[i]) {
                     let date = new Date(this.deliveryPlan.delivery_dates[i]);
-                    deliveryContainer.innerHTML = daysInNorwegian[date.getDay()];
+                    date.setHours(0, 0, 0, 0);
+    
+                    if (date.getTime() === today.getTime()) {
+                        deliveryContainer.innerHTML = 'i dag';
+                    } else if (date.getTime() === tomorrow.getTime()) {
+                        deliveryContainer.innerHTML = 'i morgen';
+                    } else {
+                        deliveryContainer.innerHTML = daysInNorwegian[date.getDay()];
+                    }
                     wrapper.appendChild(deliveryContainer);
                 }
-
             }
         }
-
+    
         return wrapper;
     }
 });
